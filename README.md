@@ -1,5 +1,3 @@
-This project is written with a microservice structure approach (although I think it doesn't fit that much and maybe I'll refactor it later)
-
 # Instalation and usage
 1. You will need go version 1.12 or above
 2. Set up your env variables in conf.yaml
