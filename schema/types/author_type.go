@@ -1,7 +1,8 @@
-package schema
+package types
 
 import (
 	"github.com/disturb16/graphql_golang/internal/models"
+	"github.com/disturb16/graphql_golang/internal/services"
 	"github.com/graphql-go/graphql"
 )
 
@@ -21,6 +22,8 @@ var AuthorType = graphql.NewObject(graphql.ObjectConfig{
 		"posts": &graphql.Field{
 			Type: graphql.NewList(PostType),
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				service := params.Context.Value("service").(*services.Service)
+
 				author := params.Source.(models.Author)
 				result, err := service.GetPostsByAuthor(author.ID)
 				if err != nil {

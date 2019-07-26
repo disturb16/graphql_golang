@@ -9,8 +9,8 @@ import (
 	"github.com/disturb16/graphql_golang/internal/services"
 )
 
-// Handler main structure with handlers functionality
-type Handler struct {
+// handler main structure with handlers functionality
+type handler struct {
 	Service *services.Service
 }
 
@@ -21,20 +21,20 @@ type healthcheck struct {
 }
 
 // New initialize main handler
-func New(s *services.Service) *Handler {
-	return &Handler{
+func New(s *services.Service) *handler {
+	return &handler{
 		Service: s,
 	}
 }
 
 // Home handler example
-func (h *Handler) home(w http.ResponseWriter, req *http.Request) {
+func (h *handler) home(w http.ResponseWriter, req *http.Request) {
 
 	output := "Hello World"
 	jsonResponse(w, output)
 }
 
-func (h *Handler) healthCheck(w http.ResponseWriter, r *http.Request) {
+func (h *handler) healthCheck(w http.ResponseWriter, r *http.Request) {
 	// local properties
 	var out healthcheck
 	var err error

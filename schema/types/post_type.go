@@ -1,7 +1,8 @@
-package schema
+package types
 
 import (
 	"github.com/disturb16/graphql_golang/internal/models"
+	"github.com/disturb16/graphql_golang/internal/services"
 	"github.com/graphql-go/graphql"
 )
 
@@ -21,6 +22,8 @@ var PostType = graphql.NewObject(graphql.ObjectConfig{
 		"comments": &graphql.Field{
 			Type: graphql.NewList(CommentType),
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				service := params.Context.Value("service").(*services.Service)
+
 				post := params.Source.(models.Post)
 				comments, err := service.GetCommentsByPost(post.ID)
 
