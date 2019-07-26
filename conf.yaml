@@ -1,0 +1,8 @@
+Port: 8080
+UseGraphiQL: true
+Database:
+  Port: 3306
+  Host: "localhost"
+  Name: "blog"
+  User: "root"
+  Password: ""
