@@ -12,6 +12,19 @@ import (
 	"github.com/disturb16/graphql_golang/settings"
 )
 
+func errorHandler(err error) gqlerrors.FormattedError {
+	var formatted gqlerrors.FormattedError
+	switch err := err.(type) {
+	case *gqlerrors.Error:
+		formatted = gqlerrors.FormatError(err)
+	default:
+		log.Println(err)
+	}
+
+	log.Println(err)
+	return formatted
+}
+
 // NewHandler main handler for graphql
 func NewHandler() (*handler.Handler, error) {
 	config, err := settings.Configuration("./")
@@ -46,20 +59,9 @@ func NewHandler() (*handler.Handler, error) {
 	}
 
 	h := handler.New(&handler.Config{
-		Schema:   &schema,
-		GraphiQL: config.UseGraphiQL,
-		FormatErrorFn: func(err error) gqlerrors.FormattedError {
-			var formatted gqlerrors.FormattedError
-			switch err := err.(type) {
-			case *gqlerrors.Error:
-				formatted = gqlerrors.FormatError(err)
-			default:
-				log.Println(err)
-			}
-
-			log.Println(err)
-			return formatted
-		},
+		Schema:        &schema,
+		GraphiQL:      config.UseGraphiQL,
+		FormatErrorFn: errorHandler,
 	})
 
 	return h, nil
