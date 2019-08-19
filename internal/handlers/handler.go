@@ -7,11 +7,13 @@ import (
 	"time"
 
 	"github.com/disturb16/graphql_golang/internal/services"
+	graphHndl "github.com/graphql-go/handler"
 )
 
 // handler main structure with handlers functionality
 type handler struct {
 	Service *services.Service
+	graphqlHandler  *graphHndl.Handler
 }
 
 // healthcheck model definition
@@ -21,9 +23,10 @@ type healthcheck struct {
 }
 
 // New initialize main handler
-func New(s *services.Service) *handler {
+func New(s *services.Service, gh *graphHndl.Handler) *handler {
 	return &handler{
 		Service: s,
+		graphqlHandler: gh,
 	}
 }
 

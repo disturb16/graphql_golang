@@ -2,10 +2,8 @@ package handlers
 
 import (
 	"context"
-	"log"
 	"net/http"
 
-	"github.com/disturb16/graphql_golang/schema"
 	"github.com/disturb16/graphql_golang/settings"
 	"github.com/gorilla/mux"
 )
@@ -44,18 +42,14 @@ func (h *handler) Router() *mux.Router {
 
 	// set default prefix for Service
 	api := router.PathPrefix("/blog-service").Subrouter()
-	graphqlHandler, err := schema.NewHandler()
 
-	if err != nil {
-		log.Fatal(err)
-	}
 	// sets base context data for all handlers
 	api.Use(initBaseContext)
 	api.Use(h.initServiceInContext)
 
 	// set endpoints
 	api.HandleFunc("/healthcheck", h.healthCheck).Methods("GET")
-	api.HandleFunc("/graphql", graphqlHandler.ServeHTTP)
+	api.HandleFunc("/graphql", h.graphqlHandler.ServeHTTP)
 
 	return router
 }

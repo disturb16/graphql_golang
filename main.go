@@ -10,6 +10,7 @@ import (
 	"github.com/disturb16/graphql_golang/internal/handlers"
 	"github.com/disturb16/graphql_golang/internal/services"
 	"github.com/disturb16/graphql_golang/settings"
+	"github.com/disturb16/graphql_golang/schema"
 )
 
 func main() {
@@ -42,8 +43,14 @@ func main() {
 		}
 	}
 
+	graphqlHandler, err := schema.NewHandler()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	//Create main handler
-	handler := handlers.New(service)
+	handler := handlers.New(service, graphqlHandler)
 
 	//Start server
 	portToListen := strconv.Itoa(config.Port)
