@@ -12,8 +12,8 @@ import (
 	"github.com/disturb16/graphql_golang/settings"
 )
 
-// New main handler for graphql
-func New() (*handler.Handler, error) {
+// NewHandler main handler for graphql
+func NewHandler() (*handler.Handler, error) {
 	config, err := settings.Configuration("./")
 	if err != nil {
 		log.Fatal(err)

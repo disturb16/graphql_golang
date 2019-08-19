@@ -33,7 +33,7 @@ var AddCommentMutation = &graphql.Field{
 			return nil, err
 		}
 
-		comment, err := service.GetCommentByID(insertID)
+		comment, err := service.CommentByID(insertID)
 
 		if err != nil {
 			return nil, err

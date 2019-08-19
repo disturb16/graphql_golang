@@ -23,9 +23,9 @@ var PostType = graphql.NewObject(graphql.ObjectConfig{
 			Type: graphql.NewList(CommentType),
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				service := params.Context.Value("service").(*services.Service)
-
 				post := params.Source.(models.Post)
-				comments, err := service.GetCommentsByPost(post.ID)
+
+				comments, err := service.CommentsByPost(post.ID)
 
 				if err != nil {
 					return nil, err

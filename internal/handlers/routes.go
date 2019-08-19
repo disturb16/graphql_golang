@@ -44,7 +44,7 @@ func (h *handler) Router() *mux.Router {
 
 	// set default prefix for Service
 	api := router.PathPrefix("/blog-service").Subrouter()
-	graphqlHandler, err := schema.New()
+	graphqlHandler, err := schema.NewHandler()
 
 	if err != nil {
 		log.Fatal(err)
@@ -54,7 +54,6 @@ func (h *handler) Router() *mux.Router {
 	api.Use(h.initServiceInContext)
 
 	// set endpoints
-	api.HandleFunc("/home", h.home).Methods("GET")
 	api.HandleFunc("/healthcheck", h.healthCheck).Methods("GET")
 	api.HandleFunc("/graphql", graphqlHandler.ServeHTTP)
 

@@ -12,7 +12,7 @@ var PostsQuery = &graphql.Field{
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 		service := params.Context.Value("service").(*services.Service)
 
-		posts, err := service.GetPosts()
+		posts, err := service.Posts()
 		if err != nil {
 			return nil, err
 		}

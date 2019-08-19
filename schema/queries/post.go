@@ -18,7 +18,7 @@ var PostQuery = &graphql.Field{
 		service := params.Context.Value("service").(*services.Service)
 
 		id := params.Args["id"].(int)
-		post, err := service.GetPostByID(int64(id))
+		post, err := service.PostByID(int64(id))
 
 		if err != nil {
 			return nil, err

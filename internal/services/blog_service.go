@@ -4,8 +4,9 @@ import (
 	"github.com/disturb16/graphql_golang/internal/models"
 )
 
-// GetPosts returns list of posts
-func (s *Service) GetPosts() ([]models.Post, error) {
+// Posts returns list of posts
+func (s *Service) Posts() ([]models.Post, error) {
+
 	posts := []models.Post{}
 	qry := "select id, title, content, author_id from POSTS"
 
@@ -32,8 +33,8 @@ func (s *Service) GetPosts() ([]models.Post, error) {
 	return posts, err
 }
 
-// GetComments returns list of comments
-func (s *Service) GetComments() ([]models.Comment, error) {
+// Comments returns list of comments
+func (s *Service) Comments() ([]models.Comment, error) {
 	comments := []models.Comment{}
 	qry := "select id, name, content, post_id from COMMENTS"
 
@@ -60,8 +61,9 @@ func (s *Service) GetComments() ([]models.Comment, error) {
 	return comments, err
 }
 
-// GetCommentsByPost returns list of comments by post
-func (s *Service) GetCommentsByPost(postID int64) ([]models.Comment, error) {
+// CommentsByPost returns list of comments by post
+func (s *Service) CommentsByPost(postID int64) ([]models.Comment, error) {
+
 	comments := []models.Comment{}
 	qry := "select id, name, content, post_id from COMMENTS where post_id = ?"
 
@@ -88,8 +90,8 @@ func (s *Service) GetCommentsByPost(postID int64) ([]models.Comment, error) {
 	return comments, err
 }
 
-// GetAuthorByID returns specific author
-func (s *Service) GetAuthorByID(authorID int) (models.Author, error) {
+// AuthorByID returns specific author
+func (s *Service) AuthorByID(authorID int) (models.Author, error) {
 	author := models.Author{}
 	qry := "select id, name, email from AUTHORS where id = ?"
 	rows, err := s.db.Query(qry, authorID)
@@ -111,8 +113,8 @@ func (s *Service) GetAuthorByID(authorID int) (models.Author, error) {
 	return author, err
 }
 
-// GetPostsByAuthor returns list of posts by author
-func (s *Service) GetPostsByAuthor(authorID int64) ([]models.Post, error) {
+// PostsByAuthor returns list of posts by author
+func (s *Service) PostsByAuthor(authorID int64) ([]models.Post, error) {
 	posts := []models.Post{}
 	qry := "select id, title, content, author_id from POSTS where author_id = ?"
 
@@ -154,8 +156,8 @@ func (s *Service) AddPost(title, content string, authorID int) (int64, error) {
 	return insertID, nil
 }
 
-// GetPostByID returns specific  post
-func (s *Service) GetPostByID(id int64) (models.Post, error) {
+// PostByID returns specific  post
+func (s *Service) PostByID(id int64) (models.Post, error) {
 	post := models.Post{}
 
 	qry := "select id, title, content, author_id from POSTS where id = ?"
@@ -185,8 +187,8 @@ func (s *Service) AddComment(name, content string, postID int) (int64, error) {
 	return insertID, nil
 }
 
-// GetCommentByID returns specific comment
-func (s *Service) GetCommentByID(commentID int64) (models.Comment, error) {
+// CommentByID returns specific comment
+func (s *Service) CommentByID(commentID int64) (models.Comment, error) {
 
 	comment := models.Comment{}
 

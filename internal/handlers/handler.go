@@ -27,13 +27,6 @@ func New(s *services.Service) *handler {
 	}
 }
 
-// Home handler example
-func (h *handler) home(w http.ResponseWriter, req *http.Request) {
-
-	output := "Hello World"
-	jsonResponse(w, output)
-}
-
 func (h *handler) healthCheck(w http.ResponseWriter, r *http.Request) {
 	// local properties
 	var out healthcheck

@@ -33,7 +33,7 @@ var AddPostMutation = &graphql.Field{
 			return nil, err
 		}
 
-		post, err := service.GetPostByID(insertID)
+		post, err := service.PostByID(insertID)
 
 		if err != nil {
 			return nil, err

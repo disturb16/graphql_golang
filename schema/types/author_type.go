@@ -25,7 +25,7 @@ var AuthorType = graphql.NewObject(graphql.ObjectConfig{
 				service := params.Context.Value("service").(*services.Service)
 
 				author := params.Source.(models.Author)
-				result, err := service.GetPostsByAuthor(author.ID)
+				result, err := service.PostsByAuthor(author.ID)
 				if err != nil {
 					return nil, err
 				}

@@ -17,7 +17,7 @@ var AuhtorQuery = &graphql.Field{
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 		service := params.Context.Value("service").(*services.Service)
 
-		author, err := service.GetAuthorByID(params.Args["id"].(int))
+		author, err := service.AuthorByID(params.Args["id"].(int))
 
 		if err != nil {
 			return nil, err
